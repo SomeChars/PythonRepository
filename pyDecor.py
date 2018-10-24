@@ -1,10 +1,10 @@
- def repeat(n):
+def repeat(n):
 	def fake_func(true_func):
 		def repeater(argument):
+			result = argument
 			for counter in range(n):
 				result = true_func(argument)
 				argument = result
-			print(result)
 			return result
 		return repeater
 	return fake_func
