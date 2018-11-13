@@ -8,7 +8,4 @@ def egcdbody(a,b):
     
 def egcd(a,b):
     x,y = egcdbody(a,b)
-    if a > b:
-        print(str(gcd(a,b))+" = "+str(x)+"*"+str(a)+" + "+str(y)+"*"+str(b))
-    else:
-        print(str(gcd(a,b))+" = "+str(x)+"*"+str(a)+" + "+str(y)+"*"+str(b))
+    print(str(gcd(a,b))+" = "+str(x)+"*"+str(a)+" + "+str(y)+"*"+str(b)
