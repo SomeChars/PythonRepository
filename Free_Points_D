@@ -1,0 +1,14 @@
+#Используйте egcd
+
+def egcdbody(a,b):
+    if b == 0:
+        return(1,0)
+    x,y = egcdbody(b,a%b)
+    return (y,x-int(a/b)*y)
+    
+def egcd(a,b):
+    x,y = egcdbody(a,b)
+    if a > b:
+        print(str(gcd(a,b))+" = "+str(x)+"*"+str(a)+" + "+str(y)+"*"+str(b))
+    else:
+        print(str(gcd(a,b))+" = "+str(x)+"*"+str(a)+" + "+str(y)+"*"+str(b))
