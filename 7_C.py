@@ -12,7 +12,6 @@ def str_base(number, base):
             if a < 10:
                     sum += str(a)
             else:
-                if i == 0:
                     sum += chr(65 + a - 10)
             i -= 1
         return sum
