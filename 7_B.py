@@ -1,11 +1,13 @@
 #Используйте вторую фунцию
+#Можно подобрать числа Кармайкла, которые пройдут проверку первой функцией
+#Рандомный выбор 10 чисел сильно уменьшает шансы, что у вас это получится (как минимум в 2^10 раз вроде)
 
 import math
 import random
 
 def easyprimalitycheck(n):
     if n==2 or n==3 or n==5 or n==7 or n==11:
-        return 1
+        return True
     counter = 0
     a = 2
     if a**(n-1) % n == 1:
@@ -23,17 +25,17 @@ def easyprimalitycheck(n):
     if a**(n-1) % n == 1:
         counter+=1
     if counter == 5:
-        return 1
+        return False
     else:
-        return 0
+        return True
         
     
 def primality(n):
     if n < 500:
         if easyprimalitycheck(n):
-            return 1
+            return True
         else:
-            return 0
+            return False
     counter = 0
     a = 0
     for i in range (10):
@@ -43,6 +45,6 @@ def primality(n):
         if a**(n-1) % n == 1:
             counter += 1
     if counter == 10:
-        return 1
+        return True
     else:
-        return 0
+        return False
