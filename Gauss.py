@@ -1,6 +1,4 @@
-Python 3.7.0 (v3.7.0:1bf9cc5093, Jun 27 2018, 04:06:47) [MSC v.1914 32 bit (Intel)] on win32
-Type "copyright", "credits" or "license()" for more information.
->>> import copy  # to copy list of lists
+#Если надо - напишу ввод матриц, вывод правда немного кривоват, но это вроде аппаратная проблема
 
 m = [
     [6,5,4,3,1],
@@ -49,5 +47,3 @@ def backward(a,b):
 def Gauss(a,b):
     c,d = forward(a,b)
     return(backward(c,d))
-
-print(Gauss(m,x))
