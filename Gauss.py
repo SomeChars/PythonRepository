@@ -11,7 +11,6 @@ m = [
 x = [44,15,21,21,20]
 
 def forward(a,b):
-    flag = 0
     for i in range (a.__len__() - 1):
         for j in range (i + 1,a.__len__()):
             c = a
@@ -30,7 +29,12 @@ def forward(a,b):
 
 
 def backward(a,b):
-    a[a.__len__() - 1][a.__len__() - 1] = b[b.__len__() - 1] / a[a.__len__() - 1][a.__len__() - 1]
+    is_ok = 1
+    if a[a.__len__() - 1][a.__len__() - 1] != 0:
+        a[a.__len__() - 1][a.__len__() - 1] = b[b.__len__() - 1] / a[a.__len__() - 1][a.__len__() - 1]
+    else:
+        print("Некорректный ввод")
+        is_ok = 0
     for i in range (1,a.__len__()):
         for j in range (a.__len__()):
             if j == (a.__len__() - i - 1):
@@ -42,7 +46,8 @@ def backward(a,b):
         a[a.__len__() - i - 1][a.__len__() - i - 1] = b[b.__len__() - i - 1] / a[a.__len__() - i - 1][a.__len__() - i - 1]
     for k in range (a.__len__()):
         b[k] = a[k][k]
-    return b
+    if is_ok:
+        return b
 
 def Gauss(a,b):
     c,d = forward(a,b)
