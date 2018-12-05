@@ -1,50 +1,24 @@
-#Используйте вторую фунцию
-#Можно подобрать числа Кармайкла, которые пройдут проверку первой функцией, но это маловероятно
-#Рандомный выбор 10 чисел сильно уменьшает шансы, что у вас это получится (как минимум в 2^10 раз вроде)
-
+#Числа прошедшие проверку первой фунцией с помощью 2,3,5 называются Industrial primal numbers
+#Почти не врёт но всё равно медленнее проверки в лоб из-за того что операций как минимум в 2 раза больше чем в лоб
+#Так ещё они и тяжелее чем в лоб, поэтому особого смысла в первой функции нет :|
+import functools
 import math
-import random
 
-def easyprimalitycheck(n):
-    if n==2 or n==3 or n==5 or n==7 or n==11:
+def Fermat_primality_check(n):
+    if n==1 or n==2 or n==3 or n==5:
         return True
-    counter = 0
-    a = 2
-    if a**(n-1) % n == 1:
-        counter+=1
-    a = 3
-    if a**(n-1) % n == 1:
-        counter+=1
-    a = 5
-    if a**(n-1) % n == 1:
-        counter+=1
-    a = 7
-    if a**(n-1) % n == 1:
-        counter+=1
-    a = 11
-    if a**(n-1) % n == 1:
-        counter+=1
-    if counter == 5:
-        return False
-    else:
+    if (pow(2,n-1) % n == 1) and (pow(3,n-1) % n == 1) and (pow(5,n-1) % n == 1):
         return True
-        
-    
-def primality(n):
-    if n < 500:
-        if easyprimalitycheck(n):
-            return True
-        else:
+    return False
+
+@functools.lru_cache()
+def cached_primality_check(n):
+    if n == 1 or n == 2:
+        return True
+    for i in range (2, 1+math.ceil(math.sqrt(n))):
+        if n % i == 0:
             return False
-    counter = 0
-    a = 0
-    for i in range (10):
-        a = random.randint(1,int(math.sqrt(n)))
-        while not easyprimalitycheck(a):
-            a = random.randint(1,int(math.sqrt(n)))
-        if a**(n-1) % n == 1:
-            counter += 1
-    if counter == 10:
-        return True
-    else:
-        return False
+    return True
+
+for i in range (2,100):
+    print (Fermat_primality_check(i), cached_primality_check(i), i)
