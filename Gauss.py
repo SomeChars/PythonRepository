@@ -50,5 +50,3 @@ def Gauss(a,b):
     return(backward(c,d))
 
 print(Gauss(m,x))
-
-print(Gauss(m,x))
