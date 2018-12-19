@@ -13,7 +13,7 @@ def Fermat_primality_check(n):
 
 @functools.lru_cache()
 def cached_primality_check(n):
-    if n == 1 or n == 2:
+    if n == 2:
         return True
     for i in range (2, 1+math.ceil(math.sqrt(n))):
         if n % i == 0:
