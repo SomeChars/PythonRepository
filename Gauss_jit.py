@@ -1,4 +1,6 @@
 from numba import jit
+import timeit
+
 
 m = [
     [6,5,4,3,1],
@@ -10,16 +12,13 @@ m = [
 
 x = [45,15,21,21,20]
 
-len = m.__len__()
-lenb = x.__len__()
-
 @jit(fastmath=True)
 def forward(a,b):
-    for i in range (len - 1):
+    for i in range (b.__len__() - 1):
         if a[i][i] == 0:
             print("Некорректный ввод")
             break
-        for j in range (i + 1,len):
+        for j in range (i + 1,b.__len__()):
             c = a
             d = b
             if a[j][i] == 0:
@@ -28,7 +27,7 @@ def forward(a,b):
             d[i] *= diff
             b[j] -= d[i]
             d[i] /= diff
-            for k in range (len):
+            for k in range (b.__len__()):
                 c[i][k] *= diff
                 a[j][k] -= c[i][k]
                 c[i][k] /= diff
@@ -37,17 +36,17 @@ def forward(a,b):
 @jit(fastmath=True)
 def backward(a,b):
     is_ok = 1
-    if a[len - 1][len - 1] != 0:
-        a[len - 1][len - 1] = b[lenb - 1] / a[len - 1][len - 1]
+    if a[b.__len__() - 1][b.__len__() - 1] != 0:
+        a[b.__len__() - 1][b.__len__() - 1] = b[b.__len__() - 1] / a[b.__len__() - 1][b.__len__() - 1]
     else:
         print("Некорректный ввод")
         is_ok = 0
-    for i in range (1,len):
-        for j in range (len - i,len):
-            b[lenb - i - 1] -= a[len - i - 1][j] * a[len - i][j]
-            a[len - i - 1][j] = a[len - i][j]
-        a[len - i - 1][len - i - 1] = b[lenb - i - 1] / a[len - i - 1][len - i - 1]
-    for k in range (len):
+    for i in range (1,b.__len__()):
+        for j in range (b.__len__() - i,b.__len__()):
+            b[b.__len__() - i - 1] -= a[b.__len__() - i - 1][j] * a[b.__len__() - i][j]
+            a[b.__len__() - i - 1][j] = a[b.__len__() - i][j]
+        a[b.__len__() - i - 1][b.__len__() - i - 1] = b[b.__len__() - i - 1] / a[b.__len__() - i - 1][b.__len__() - i - 1]
+    for k in range (b.__len__()):
         b[k] = a[k][k]
     if is_ok:
         return b
@@ -59,4 +58,4 @@ def Gauss(a,b):
 
 print(Gauss(m,x))
 
-%timeit Gauss(m,x)
+print(timeit.timeit(lambda: Gauss(m, x)))
