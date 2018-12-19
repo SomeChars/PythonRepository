@@ -1,6 +1,7 @@
 from numba import njit
 import numpy as np
 import copy
+import timeit
 
 m = np.array([
     [6.0,5.0,4.0,3.0,1.0],
@@ -55,5 +56,5 @@ def Gauss(a,b):
     c,d = forward(a,b)
     return(backward(c,d))
 
+print(timeit.timeit(lambda: Gauss(m, x)))
 
-%timeit Gauss(m,x)
