@@ -5,7 +5,7 @@ import functools
 import math
 
 def Fermat_primality_check(n):
-    if n==1 or n==2 or n==3 or n==5:
+    if n==2 or n==3 or n==5:
         return True
     if (pow(2,n-1) % n == 1) and (pow(3,n-1) % n == 1) and (pow(5,n-1) % n == 1):
         return True
