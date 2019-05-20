@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p>Well your number is: {{number}}</p>
+
+<p>Method used: {{method}}</p>
+
+<form action="/number" method="POST">
+  <input type="text" name="number" value="{{number_param}}" />
+  <input type="submit" value="Post!">
+</form>
+
+<p>{{res}}</p>
+
+
+{% endblock %}
