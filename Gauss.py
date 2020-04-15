@@ -1,5 +1,5 @@
 #округляю решение на 0.000003
-def GJ(a,b):
+def Gauss(a,b):
     used = []
     num = len(b)
     for j in range(num):
@@ -13,7 +13,7 @@ def GJ(a,b):
             b[i] /= a[i][j]
             a[i][j] /= a[i][j]
             for k in range(num):
-                if k == i:
+                if k == i or k in used:
                     continue
                 if a[k][j] != 0:
                     for t in range(j+1,num):
@@ -25,8 +25,11 @@ def GJ(a,b):
         if not possible:
             print('Null Determinant!')
             return None
-    res = []
-    for i in used:
-        if abs(b[i]-int(b[i])) < 0.000003 or abs(b[i]-int(b[i]+1)) < 0.000003: res += [round(b[i])]
-        else: res += [b[i]]
+    res = [b[i] for i in used]
+    for i in range(num-1,-1,-1):
+        for j in range(i+1,num):
+            res[i] -= res[j]*a[used[i]][j]
+    for i in range(num):
+        if abs(res[i] - int(res[i])) < 0.000003 or abs(res[i] - int(res[i] + 1)) < 0.000003:
+            res[i] = round(res[i])
     return res
