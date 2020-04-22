@@ -1,7 +1,9 @@
-#округляю решение на 0.000003
+import copy
+
+
 def Gauss(m,v):
-    a = m.copy()
-    b = v.copy()
+    a = copy.deepcopy(m)
+    b = copy.deepcopy(v)
     used = []
     num = len(b)
     for j in range(num):
@@ -28,10 +30,7 @@ def Gauss(m,v):
             print('Null Determinant!')
             return None
     res = [b[i] for i in used]
-    for i in range(num-1,-1,-1):
+    for i in range(num-2,-1,-1):
         for j in range(i+1,num):
             res[i] -= res[j]*a[used[i]][j]
-    for i in range(num):
-        if abs(res[i] - int(res[i])) < 0.000003 or abs(res[i] - int(res[i] + 1)) < 0.000003:
-            res[i] = round(res[i])
     return res
