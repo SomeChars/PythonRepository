@@ -1,5 +1,7 @@
 #округляю решение на 0.000003
-def Gauss(a,b):
+def Gauss(m,v):
+    a = m.copy()
+    b = v.copy()
     used = []
     num = len(b)
     for j in range(num):
